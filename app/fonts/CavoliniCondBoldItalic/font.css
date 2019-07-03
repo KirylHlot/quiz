@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'Cavolini-CondBoldItalic';
+  src: url('Cavolini-CondBoldItalic.ttf') format('truetype'),
+       url('Cavolini-CondBoldItalic.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CavoliniCondBoldItalic';
+  src: url('CavoliniCondBoldItalic.eot');
+  src: url('CavoliniCondBoldItalic.eot?#iefix') format('embedded-opentype'),
+       url('CavoliniCondBoldItalic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+

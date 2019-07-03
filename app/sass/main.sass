@@ -1,0 +1,264 @@
+@import "vars"
+@import "fonts"
+@import "libs"
+
+::placeholder
+	color: #666
+
+::selection
+	background-color: $accent
+	color: $white
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video
+	margin: 0
+	padding: 0
+	border: 0
+	font-size: 100%
+	font: inherit
+	vertical-align: baseline
+	box-sizing: border-box
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section
+	display: block
+
+ol, ul
+	list-style: none
+
+table
+	border-collapse: collapse
+	border-spacing: 0
+
+a
+	color: inherit
+	&:hover
+		color: inherit
+		text-decoration: none
+
+input
+	&[type="number"]
+		&::-webkit-outer-spin-button, &::-webkit-inner-spin-button
+			-webkit-appearance: none
+			margin: 0
+		-moz-appearance: textfield
+		&:hover, &:focus
+			-moz-appearance: number-input
+	&[type=number]
+		&::-webkit-inner-spin-button, &::-webkit-outer-spin-button
+			-webkit-appearance: none
+			margin: 0
+
+section, header
+	height: auto
+	position: relative
+	z-index: 10
+
+.shadow
+	box-shadow: 0px 0px 29px -10px rgba($black,0.75)
+///////////////end reset
+
+body
+	font-size: 16px
+	min-height: 100vh
+	width: 100%
+	position: relative
+	line-height: normal
+	overflow-x: hidden
+	font-family: $default-font
+	color: $color
+	&.isfooter
+		display: flex
+		justify-content: center
+		align-items: flex-end
+		footer
+			display: block
+	&.main_view
+		.main_right_wrapper
+			right: 0
+	&.start_quiz
+		.quiz_wrapper
+			right: 0
+.main_right_wrapper
+	position: fixed
+	width: 45vw
+	height: 100vh
+	right: -100%
+	top: 0
+	background-color: $bgcolor
+	border-left: 1px solid $border
+	display: flex
+	justify-content: center
+	align-items: center
+	z-index: 1
+	transition: right .5s ease-in-out
+	.logo_line
+		position: absolute
+		width: 100%
+		height: 80px
+		padding: 8px 44px
+		top: 0
+		left: 0
+		right: 0
+		border-bottom: 1px solid $border
+		img
+			width: auto
+			height: 100%
+			max-height: 70px
+			display: block
+			margin-right: auto
+	.content_wrapper
+		padding: 0 44px
+		.title
+			font-size: 30px
+			font-weight: 700
+			line-height: 1.2
+			color: #020202
+			margin-bottom: 24px
+		.description
+			font-size: 18px
+			font-weight: 500
+			line-height: 1.33
+			margin-bottom: 32px
+		.button
+			min-height: 55px
+			width: fit-content
+			max-width: 180px
+			min-width: 140px
+			box-shadow: 0 1px 4px 0 rgba($accent,.2)
+			color: $white
+			border-radius: 40px
+			font-size: 18px
+			border: none
+			cursor: pointer
+			background-color: $accent
+			display: flex
+			flex-direction: row
+			justify-content: center
+			align-items: center
+			text-align: center
+			padding: 8px 16px
+			.fa
+				margin-right: 8px
+				font-size: 18px
+
+.quiz_wrapper
+	position: fixed
+	width: 100vw
+	height: 100vh
+	top: 0
+	right: -100%
+	background-color: $bgcolor
+	z-index: 20
+	transition: right .5s ease-in-out
+
+
+
+
+
+
+footer
+	position: relative
+	z-index: 1
+	width: 100%
+	height: auto
+	padding: 32px 0
+	background-color: $bgcolor
+	border-top: 1px solid $border
+	display: none
+	.footer_wrapper
+		width: 65%
+		height: auto
+		margin: auto
+		display: flex
+		flex-direction: column
+		align-items: center
+		justify-content: center
+		font-size: 14px
+		li
+			margin-bottom: 16px
+			text-align: center
+
+
+
+
+
+
+
+// .main_header
+
+	
+
+
+// .wibro
+// 	position: relative
+// 	-webkit-animation: 0.3s tremor ease-out infinite
+// 	animation: 0.3s tremor ease-out infinite
+
+// @-webkit-keyframes tremor
+//   0%, 25%
+//     left: -2px
+//     top: -2px
+//     -webkit-transform: translateX(-4%)
+//     transform: translateX(-4%)
+
+//   50%, 100%
+//     left: 3px
+//     top: 3px
+//     -webkit-transform: translateX(4%)
+//     transform: translateX(4%)
+
+
+// @-moz-keyframes tremor
+//   0%, 25%
+//     left: -2px
+//     -webkit-transform: translateX(-4%)
+//     transform: translateX(-4%)
+
+//   50%, 100%
+//     left: 1px
+//     -webkit-transform: translateX(4%)
+//     transform: translateX(4%)
+
+
+// @-ms-keyframes tremor
+//   0%, 25%
+//     left: -1px
+//     -webkit-transform: translateX(-4%)
+//     transform: translateX(-4%)
+
+//   50%, 100%
+//     left: 1px
+//     -webkit-transform: translateX(4%)
+//     transform: translateX(4%)
+
+
+// @-o-keyframes tremor
+//   0%, 25%
+//     left: -1px
+//     -webkit-transform: translateX(-4%)
+//     transform: translateX(-4%)
+
+//   50%, 100%
+//     left: 1px
+//     -webkit-transform: translateX(4%)
+//     transform: translateX(4%)
+
+
+// @keyframes tremor
+//   0%, 25%
+//     left: -2px
+//     -webkit-transform: translateX(-4%)
+//     transform: translateX(-4%)
+
+//   50%, 100%
+//     left: 2px
+//     -webkit-transform: translateX(4%)
+//     transform: translateX(4%)
+
+
+
+
+
+
+
+
+@import "media" // Always at the end

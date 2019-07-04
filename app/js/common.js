@@ -1,23 +1,125 @@
 var body_element = document.querySelector('.body');
+var button_next = document.querySelector('.button_next');
+var button_back = document.querySelector('.button_back');
+var quiz_item_mass = document.getElementsByClassName('quiz_item');
+var quiz_wrapper = document.querySelector('.quiz_wrapper');
+
+
+//////слушатель квиз-враппера
+// создаем экземпляр наблюдателя
+var observer = new MutationObserver(function(mutations) {
+	showQuizItem(+quiz_wrapper.dataset.index);
+	fillProgressLine(+quiz_wrapper.dataset.index);
+});
+// настраиваем наблюдатель
+var config = { attributes: true, childList: true, characterData: true }
+//////конец слушатель квиз-враппера
+
+
 window.onload = function() {
-	main_right_wrapper_height();
-}
-window.onresize = function() {
-	main_right_wrapper_height();
+
+	////////////////////дефолтные настройки
+	quiz_wrapper.dataset.index = 1;
+	//раздаем всем элемнтам квиза индексы
+	setIndexes();
+	//наполняем линию прогресса элементами
+	if (createPaintSteps(quiz_item_mass.length)){
+	//устанавливаем текущий шаг
+		fillProgressLine(1);
+	//первый итем без класса d-none
+		showQuizItem(+quiz_wrapper.dataset.index);
+	}
+
+
+	/////////////////расстановка слушателей
+	// передаем элемент и настройки в наблюдатель
+	observer.observe(quiz_wrapper, config);
+	//слушатель на следующий шаг
+	button_next.addEventListener('click', function() {
+		quiz_wrapper.dataset.index = +quiz_wrapper.dataset.index + 1;
+	});	
+	//слушатель на предыдущий шаг
+	button_back.addEventListener('click', function() {
+		quiz_wrapper.dataset.index = +quiz_wrapper.dataset.index - 1;
+	});
+	//слушатель на функция активации чекбокса
+	toggleCheckboxActive();
+	//слушатель на кнопка перехода к квизу
+	document.getElementById('start_quiz').onclick = function() {
+		body_element.classList.remove('main_view');
+		body_element.classList.add('start_quiz');
+	}
+
 }
 
+
+///высота правой колонки квиза
 function main_right_wrapper_height() {
 	document.getElementById('main_right_wrapper').style.height = document.documentElement.clientHeight - document.getElementById('footer').offsetHeight + "px";
 	return true;
 }
 
+////расставляем индексы через дата
+function setIndexes() {
+	for (var i = 0; i < quiz_item_mass.length; i++) {
+		quiz_item_mass[i].dataset.index = i+1;
+	}
+}
 
-document.getElementById('start_quiz').onclick = function() {
-	body_element.classList.remove('main_view');
-	body_element.classList.add('start_quiz');
+///Прячем итемы через д-ноун и первый оставляем
+function showQuizItem(index) {
+	for (var i = 0; i < quiz_item_mass.length; i++) {
+		quiz_item_mass[i].classList.add('d-none');
+	}
+
+	for (var i = 0; i < quiz_item_mass.length; i++) {
+		if(+quiz_item_mass[i].getAttribute('data-index') == +index){
+			quiz_item_mass[i].classList.remove('d-none');
+			return true;
+		}
+	}
+}
+
+////////Тоглим класс active чекбоксу по щелчку
+function toggleCheckboxActive() {
+	let	checkbox_mass = document.getElementsByClassName('checkbox');
+	for (var i = 0; i < checkbox_mass.length; i++) {
+		checkbox_mass[i].addEventListener('click', function() {
+			this.classList.toggle('active');
+			return true;
+		});
+	}
 }
 
 
+///////прогресс шагов и линия прогресса
+/////общее количество шагов
+document.querySelector('.all_steps').innerText = quiz_item_mass.length;
+
+//наполняем линию итемами
+function createPaintSteps(allSteps) {
+	for (var i = 0; i < allSteps; i++) {
+		let li = document.createElement('li');
+		li.className = "progress_part d-none";
+		li.style.width = 100/allSteps + "%";
+		document.querySelector('.progress_line').appendChild(li);
+	}
+	return true;
+}
+
+////текущий шаг + заполнение линии прогресса
+function fillProgressLine(currient_step) {
+	document.querySelector('.current_step').innerText = currient_step;
+	let progress_part_mass = document.getElementsByClassName('progress_part');
+
+	for (var i = 0; i < progress_part_mass.length; i++) {
+		if (i < currient_step) {
+			progress_part_mass[i].classList.remove('d-none');
+		} else {
+			progress_part_mass[i].classList.add('d-none');
+		}
+	}
+}
 
 ////animate (set viewportchecker)
 //jQuery(document).ready(function() {

@@ -10,6 +10,7 @@ var quiz_wrapper = document.querySelector('.quiz_wrapper');
 var observer = new MutationObserver(function(mutations) {
 	showQuizItem(+quiz_wrapper.dataset.index);
 	fillProgressLine(+quiz_wrapper.dataset.index);
+	setRightColumnTips(quiz_item_mass[+quiz_wrapper.dataset.index-1]);
 });
 // настраиваем наблюдатель
 var config = { attributes: true, childList: true, characterData: true }
@@ -17,7 +18,6 @@ var config = { attributes: true, childList: true, characterData: true }
 
 
 window.onload = function() {
-
 	////////////////////дефолтные настройки
 	quiz_wrapper.dataset.index = 1;
 	//раздаем всем элемнтам квиза индексы
@@ -29,7 +29,8 @@ window.onload = function() {
 	//первый итем без класса d-none
 		showQuizItem(+quiz_wrapper.dataset.index);
 	}
-
+	///сетит подсказки в правую колонку
+	setRightColumnTips(quiz_item_mass[+quiz_wrapper.dataset.index-1]);
 
 	/////////////////расстановка слушателей
 	// передаем элемент и настройки в наблюдатель
@@ -120,6 +121,14 @@ function fillProgressLine(currient_step) {
 		}
 	}
 }
+
+///Подсказки в правую колонку
+function setRightColumnTips(elem){
+	document.getElementById('right_part').innerHTML = elem.querySelector('.quiz_desc_in_right_column').innerHTML;
+
+}
+
+
 
 ////animate (set viewportchecker)
 //jQuery(document).ready(function() {

@@ -20,7 +20,7 @@
 
 </head>
 <!--start_quiz => final_step -->
- <body class="body main_view isfooter" 
+ <body class="body main_view isfooter final_textarea" 
 style="
   background: url(../img/main_bg.jpg);
   background-size: cover;
@@ -78,10 +78,10 @@ style="
         </ul>
       </div>
 
-      <div class="quiz_item ma">
+      <div class="quiz_item oo">
         <div class="question_title">Вопрос 2</div>
         <ul class="tips_line">
-          <li class="tip">Только 1 вариант</li>
+          <li class="tip">Только 1 вариант чекбокс или текстареа</li>
         </ul>
         <ul class="answer_list">
           <li class="answer_input half_width checkbox">
@@ -99,7 +99,10 @@ style="
           <li class="answer_input half_width checkbox">
             <input type="checkbox" name="v4">
             <div class="answer_text">Ответ 4</div>
-          </li>          
+          </li>  
+          <li class="answer_input full_width textarea">
+            <textarea type="text" name="message" placeholder="Свой вариант"></textarea>
+          </li>    
         </ul>
         <ul class="quiz_desc_in_right_column d-none">
           <li class="description">Подсказка</li>
@@ -107,7 +110,7 @@ style="
         </ul>
       </div>
 
-      <div class="quiz_item na">
+      <div class="quiz_item">
         <div class="question_title">Вопрос 3</div>
           <ul class="tips_line">
             <li class="tip">Можно пропустить</li>
@@ -136,10 +139,10 @@ style="
         </ul>
       </div>
 
-      <div class="quiz_item aa">
+      <div class="quiz_item all">
         <div class="question_title">Вопрос 4</div>
         <ul class="tips_line">
-<!--           <li class="tip"></li> -->
+          <li class="tip">Все ответы должны быть заполнены</li>
         </ul>
         <ul class="answer_list">
           <li class="answer_input full_width simple_input">
@@ -147,11 +150,40 @@ style="
               <input type="text" name="name" placeholder="Имя">
             </div>
           </li>            
-          <li class="answer_input full_width simple_input">
+<!--           <li class="answer_input full_width simple_input">
             <div class="simple_input_wrapper">
               <input type="number" name="phone" placeholder="Телефон">
             </div>
-          </li>      
+          </li>  -->     
+        </ul>
+        <ul class="quiz_desc_in_right_column d-none">
+          <li class="description">Подсказка 1</li>
+          <li class="description">Подсказка 2</li>
+        </ul>
+      </div>
+
+      <div class="quiz_item oom">
+        <div class="question_title">Вопрос 5</div>
+        <ul class="tips_line">
+          <li class="tip">Один или несколько вариантов</li>
+        </ul>
+        <ul class="answer_list">
+          <li class="answer_input half_width checkbox">
+            <input type="checkbox" name="v1">
+            <div class="answer_text">Ответ 1</div>
+          </li>               
+          <li class="answer_input half_width checkbox">
+            <input type="checkbox" name="v2">
+            <div class="answer_text">Ответ 2</div>
+          </li>               
+          <li class="answer_input half_width checkbox">
+            <input type="checkbox" name="v3">
+            <div class="answer_text">Ответ 3</div>
+          </li>           
+          <li class="answer_input half_width checkbox">
+            <input type="checkbox" name="v4">
+            <div class="answer_text">Ответ 4</div>
+          </li>  
         </ul>
         <ul class="quiz_desc_in_right_column d-none">
           <li class="description">Подсказка 1</li>
@@ -204,21 +236,89 @@ style="
       <div class="ff_right_wrapper">
         <form class="final_form">
           <input type="hidden" name="email_adress" value="kirillhlot@mail.ru">
-          <input type="hidden" name="answers">
-          <div class="form_input_title">Введите имя</div>
-          <div class="input_wrapper">
-            <i class="fa fa-user" aria-hidden="true"></i>
-            <input type="text" name="name" placeholder="Имя*" required>
+          <input type="hidden" name="answers" id="answers">
+         
+          <!-- первое окно  -->
+          <div class="first_window">
+            <div class="form_input_title">Введите имя</div>
+            <div class="input_wrapper">
+              <i class="fa fa-user" aria-hidden="true"></i>
+              <input type="text" name="name" placeholder="Имя*" required class="main_input">
+            </div>
+            <div class="form_input_title">Введите телефон</div>
+            <div class="input_wrapper">
+              <i class="fa fa-mobile" aria-hidden="true"></i>
+              <input type="number" name="phone" placeholder="Ведите номер*" required class="main_input">
+            </div>
+            <div class="use_messenager_button">
+              <i class="fa fa-comments" aria-hidden="true"></i>
+              <span>Использовать мессенджер</span>
+            </div>
           </div>
-          <div class="form_input_title">Введите телефон</div>
-          <div class="input_wrapper">
-            <i class="fa fa-mobile" aria-hidden="true"></i>
-            <input type="number" name="phone" placeholder="Ведите номер*" required>
+          <!--  -->
+
+          <!-- second window -->
+          <div class="second_window d-none">
+            <div class="window_title">
+              Если хотите получить информацию в мессеенджер укажите удобный
+            </div>
+            <ul class="messenger_list">
+              <li class="messendger" id="facebook">
+                <img src="img/fb.png" alt="icon">
+                <div class="title">Facebook</div>
+              </li>             
+              <li class="messendger" id="telegram">
+                <img src="img/telegram.png" alt="icon">
+                <div class="title">Telegram</div>
+              </li>              
+              <li class="messendger" id="whatsapp">
+                <img src="img/whatsapp.png" alt="icon">
+                <div class="title">Whatsapp</div>
+              </li>              
+              <li class="messendger" id="viber">
+                <img src="img/viber.png" alt="icon">
+                <div class="title">Viber</div>
+              </li>
+            </ul>
+            <div class="messenager_button back_to_main">
+              <div class="back_to_contacts">Вернуться к вводу контактов</div>
+            </div>
           </div>
-          <div class="use_messenager_button">
-            <i class="fa fa-comments" aria-hidden="true"></i>
-            <span>Использовать мессенджер</span>
+          <!--  -->
+          <!-- Third window -->
+          <div class="third_window d-none">
+            <div class="final_title facebook d-none">
+              <img src="img/fb.png" alt="icon">
+              <div class="title">
+                ВВЕДИТЕ ЛОГИН ИЛИ ID MESSENGER
+              </div>
+            </div> 
+            <div class="final_title telegram d-none">
+              <img src="img/telegram.png" alt="icon">
+              <div class="title">
+                ВВЕДИТЕ НОМЕР ИЛИ ЛОГИН TELEGRAM
+              </div>
+            </div>            
+            <div class="final_title whatsapp d-none">
+              <img src="img/whatsapp.png" alt="icon">
+              <div class="title">
+                ВВЕДИТЕ НОМЕР WHATSAPP
+              </div>
+            </div>            
+            <div class="final_title viber d-none">
+              <img src="img/viber.png" alt="icon">
+              <div class="title">
+                ВВЕДИТЕ НОМЕР VIBER
+              </div>
+            </div>
+            <div class="simple_input_wrapper">
+              <input type="text" name="messenger" id="messenger_input">
+            </div>
+            <div class="messenager_button back_to_choise">
+              Выбрать другой мессенджер
+            </div>
           </div>
+          <!--  -->
           <button class="form_button">
             <i class="fa fa-check-circle-o" aria-hidden="true"></i>
             Узнать

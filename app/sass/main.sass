@@ -104,6 +104,12 @@ body
 			right: 25vw
 		.main_wrapper
 			left: -100%
+	&.final_textarea
+		#content
+			display: block
+
+#content
+	display: none
 
 .main_right_wrapper
 	position: fixed
@@ -538,6 +544,82 @@ body
 							text-decoration: underline
 
 
+.second_window
+	width: 100%
+	.window_title
+		font-size: 18px
+		color: $colorTitle
+		text-align: center
+		margin-bottom: 16px
+	.messenger_list
+		display: flex
+		flex-direction: row
+		flex-wrap: wrap
+		justify-content: space-between
+		.messendger
+			width: 48%
+			height: 40px
+			border-radius: 6px
+			border: 1px solid $border
+			display: flex
+			flex-direction: row
+			align-items: center
+			padding-left: 32px
+			position: relative
+			cursor: pointer
+			margin-bottom: 16px
+			img
+				position: absolute
+				width: 20px
+				height: auto
+				left: 4px
+			.title
+		.messenager_button
+	.back_to_contacts
+		width: 100%
+		height: auto
+		margin: 0 auto 32px
+		cursor: pointer
+		text-align: center
+		&:hover
+			color: $accent
+
+.third_window
+	width: 100%
+	position: relative
+	.final_title
+		width: 100%
+		height: auto
+		display: flex
+		flex-direction: column
+		align-items: center
+		img
+			display: block
+			margin-bottom: 24px
+		.title
+			color: $colorTitle
+			margin-bottom: 8px
+	.simple_input_wrapper
+		position: relative
+		width: 100%
+		height: auto
+		margin-bottom: 16px
+		input
+			width: 100%
+			height: 40px
+			font-size: 14px
+			padding: 4px 8px
+	.messenager_button
+		text-align: center
+		margin-bottom: 16px
+		cursor: pointer
+		margin-bottom: 32px
+		&:hover
+			color: $accent
+
+
+
+
 footer
 	position: relative
 	z-index: 1
@@ -560,89 +642,30 @@ footer
 		li
 			margin-bottom: 16px
 			text-align: center
-
-
-
-
-
-
-
-// .main_header
-
-	
-
-
-// .wibro
-// 	position: relative
-// 	-webkit-animation: 0.3s tremor ease-out infinite
-// 	animation: 0.3s tremor ease-out infinite
-
-// @-webkit-keyframes tremor
-//   0%, 25%
-//     left: -2px
-//     top: -2px
-//     -webkit-transform: translateX(-4%)
-//     transform: translateX(-4%)
-
-//   50%, 100%
-//     left: 3px
-//     top: 3px
-//     -webkit-transform: translateX(4%)
-//     transform: translateX(4%)
-
-
-// @-moz-keyframes tremor
-//   0%, 25%
-//     left: -2px
-//     -webkit-transform: translateX(-4%)
-//     transform: translateX(-4%)
-
-//   50%, 100%
-//     left: 1px
-//     -webkit-transform: translateX(4%)
-//     transform: translateX(4%)
-
-
-// @-ms-keyframes tremor
-//   0%, 25%
-//     left: -1px
-//     -webkit-transform: translateX(-4%)
-//     transform: translateX(-4%)
-
-//   50%, 100%
-//     left: 1px
-//     -webkit-transform: translateX(4%)
-//     transform: translateX(4%)
-
-
-// @-o-keyframes tremor
-//   0%, 25%
-//     left: -1px
-//     -webkit-transform: translateX(-4%)
-//     transform: translateX(-4%)
-
-//   50%, 100%
-//     left: 1px
-//     -webkit-transform: translateX(4%)
-//     transform: translateX(4%)
-
-
-// @keyframes tremor
-//   0%, 25%
-//     left: -2px
-//     -webkit-transform: translateX(-4%)
-//     transform: translateX(-4%)
-
-//   50%, 100%
-//     left: 2px
-//     -webkit-transform: translateX(4%)
-//     transform: translateX(4%)
-
-
-
-
-
-
-
+.thank
+	display: flex
+	justify-content: center
+	align-items: center
+	.thank_main_wrapper
+		width: 50vw
+		height: 60vh
+		display: flex
+		justify-content: center
+		align-items: center
+		flex-direction: column
+		text-align: center
+		border: 4px solid $border
+		padding: 40px
+		.fa
+			font-size: 50px
+			color: $accent
+			margin-bottom: 32px
+		.title
+			font-size: 32px
+			margin-bottom: 16px
+			color: $colorTitle
+		.description
+			font-size: 22px
+			color: $color
 
 @import "media" // Always at the end

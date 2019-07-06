@@ -5,6 +5,8 @@ var quiz_item_mass = document.getElementsByClassName('quiz_item');
 var simple_input_wrapper_mass = document.getElementsByClassName('simple_input_wrapper');
 var	checkbox_mass = document.getElementsByClassName('checkbox');
 var	textarea_mass = document.getElementsByClassName('textarea');
+var	messendger_mass = document.getElementsByClassName('messendger');
+var	main_input_mass = document.getElementsByClassName('main_input');
 var quiz_wrapper = document.querySelector('.quiz_wrapper');
 
 
@@ -46,6 +48,7 @@ window.onload = function() {
 				quiz_wrapper.dataset.index = +quiz_wrapper.dataset.index + 1;
 			} else {
 				body_element.classList.add('final_step');
+				setAnswers();
 			}
 		} else {
 			alert('Пожалуйста, заполните поля верно')
@@ -80,23 +83,97 @@ window.onload = function() {
 	//слушатель/переключатель на textarea
 	toggleTextareaActive();
 
+	///слушатели финального окна (мессенджер)
+	document.querySelector('.use_messenager_button').onclick = function() {
+		document.querySelector('.first_window').classList.add('d-none');
+		document.querySelector('.second_window').classList.remove('d-none');
+		document.querySelector('.form_button').classList.add('d-none');
+		for (var i = 0; i < main_input_mass.length; i++) {
+			main_input_mass[i].removeAttribute('required');
+		}
+		document.getElementById('messenger_input').setAttribute('required', true);
+	}	
+
+	document.querySelector('.back_to_contacts').onclick = function() {
+		document.querySelector('.first_window').classList.remove('d-none');
+		document.querySelector('.second_window').classList.add('d-none');
+		document.querySelector('.form_button').classList.remove('d-none');
+		for (var i = 0; i < main_input_mass.length; i++) {
+			main_input_mass[i].setAttribute('required', true);
+		}
+		document.getElementById('messenger_input').removeAttribute('required');
+	}
+
+	for (var i = 0; i < messendger_mass.length; i++) {
+		messendger_mass[i].addEventListener('click', function() {
+			document.querySelector('.second_window').classList.add('d-none');
+			document.querySelector('.third_window').classList.remove('d-none');
+			document.querySelector('.form_button').classList.remove('d-none');
+			document.querySelector('.' + this.id).classList.remove('d-none');
+
+		});
+	}
+
+	document.querySelector('.back_to_choise').onclick = function() {
+		document.querySelector('.second_window').classList.remove('d-none');
+		document.querySelector('.third_window').classList.add('d-none');
+		let final_title_mass = document.getElementsByClassName('final_title');
+		for (var i = 0; i < final_title_mass.length; i++) {
+			final_title_mass[i].classList.add('d-none');
+		}
+		document.querySelector('.form_button').classList.add('d-none');
+	}
+
+
+
+
 }//закрывает onload
 
+function setAnswers() {
+	let all_answer_mass= [];
 
+	for (let i = 0; i < quiz_item_mass.length; i++) {
+		all_answer_mass.push('<br>' + quiz_item_mass[i].querySelector('.question_title').innerText + '<br>') ////сетит значение вопроса
+		let currient_answers_mass = quiz_item_mass[i].getElementsByClassName('active');
+		for (let i = 0; i < currient_answers_mass.length; i++) {
+			////если активный элемент чекбокс
+			if(currient_answers_mass[i].classList.contains('checkbox')){
+				all_answer_mass.push(currient_answers_mass[i].querySelector('.answer_text').innerText + '<br>') ////сетит значение ответа
+			}
+			////если активный элемент textarea
+			if(currient_answers_mass[i].classList.contains('textarea')){
+				all_answer_mass.push(currient_answers_mass[i].getElementsByTagName('textarea')[0].value + '<br>') ////сетит значение ответа
+			}			
+			////если активный элемент input
+			if(currient_answers_mass[i].classList.contains('simple_input_wrapper')){
+				all_answer_mass.push(currient_answers_mass[i].getElementsByTagName('input')[0].value + '<br>') ////сетит значение ответа
+			}
+		}
+	}
+
+	let all_answers_string = "";
+
+	for (var i = 0; i < all_answer_mass.length; i++) {
+		all_answers_string = all_answers_string + all_answer_mass[i];
+	}
+
+	document.getElementById('answers').value = all_answers_string;
+	console.log(document.getElementById('answers').value);
+}
+
+///////валидация ответов и переход на следующий шаг
 function isAnswerValid (elem) {
-	// oa = only_one_answer (or/and textarea)
-	// ma = many_answer
-	// na = nonsing
-	// aa = все поля
+	// oa = чекбокс и/или текстареа
+	// oo = один вариант (чекбокс или текстареа)
+	// all = все поля должны быть заполнены
+	// oom = один или больше вариантов
 	let answers_mass = elem.getElementsByClassName('answer_input');
 
-	if (elem.classList.contains('oa')) {
+	if (elem.classList.contains('oa')) { //один ответ (чекбокс или текстареа)
 		let countCheckbox = 0;//считаем количество актив
 		let countTextarea = 0;//считаем количество актив
-
 		for (let i = 0; i < answers_mass.length; i++) {
 			if(answers_mass[i].classList.contains('active')) {
-
 				if(answers_mass[i].classList.contains('checkbox')){
 					countCheckbox++;
 					if (countCheckbox > 1) {
@@ -108,26 +185,57 @@ function isAnswerValid (elem) {
 				}
 			}
 		}
-
 		if (countCheckbox == 0 && countTextarea == 0) {
 			return false;
 		}
-		
-	}
+		return true;
+	} //end oa
 
-	if (elem.classList.contains('ma')) {
-		alert('ma')
-	}
-	if (elem.classList.contains('na')) {
-		alert('na')
-	}
-	if (elem.classList.contains('aa')) {
-		alert('aa')
-	}
+	if (elem.classList.contains('oo')) { //только один ответ
+		let countActive = 0;//считаем количество active checkbox
+		for (let i = 0; i < answers_mass.length; i++) {
+			if(answers_mass[i].classList.contains('active')) {
+				countActive++;
+				if (countActive > 1){ //если active больше одного false
+					return false;
+				}
+			}
+		}
+		if(countActive < 1) { //если active меньше одного false
+			return false;
+		} else {
+			return true;
+		}
+	} //end oo	
 
+	if (elem.classList.contains('all')) { //все поля должны быть заполнены
+		let countActive = 0;//считаем количество active checkbox
+		for (let i = 0; i < answers_mass.length; i++) {
+			if(answers_mass[i].classList.contains('active')) {
+				countActive++;
+			}
+		}
+		if(countActive != answers_mass.length){
+			return false;
+		}
+		return true;
+	} //end all
+
+	if (elem.classList.contains('oom')) { //один или больше вариантов
+		let countActive = 0;//считаем количество active checkbox
+		for (let i = 0; i < answers_mass.length; i++) {
+			if(answers_mass[i].classList.contains('active')) {
+				countActive++;
+			}
+		}
+		if(countActive < 1) { //если active еньше одного false
+			return false;
+		} else {
+			return true;
+		}
+	} //end oom	
 	return true;
-}
-
+} //end function isAnswerValid 
 
 
 ///высота правой колонки квиза
@@ -201,29 +309,11 @@ function setPoliticActive() {
 		return false;
 	}
 }
+
 //тоглим галку в политике безопасности
 function togglePoliticActive() {
 	document.querySelector('.politic_wrapper').classList.toggle('active');
 }
-
-
-$(document).ready(function() {
-   $(".final_form").submit(function() {
-   	if(setPoliticActive()){
-			$.ajax({
-         type: "POST",
-         url: "header_form_mail.php",
-         data: $(this).serialize()
-      }).done(function() {
-         $(this).find("input").val("");
-         // thank_page
-      }).fail(function() {
-        alert('Ошибка соединения');
-      });
-    }
-      return false;
-   });
-});
 
 ////////тоглит класс active инпуту simple_input
 function toggleSimpleInputActive() {
@@ -231,9 +321,11 @@ function toggleSimpleInputActive() {
 		simple_input_wrapper_mass[i].firstElementChild.addEventListener('input', function() {
 			if(this.value.length > 0) {
 				this.parentNode.classList.add('active');
+				this.parentNode.parentNode.classList.add('active');
 				return true;
 			} else {
 				this.parentNode.classList.remove('active');
+				this.parentNode.parentNode.classList.remove('active');
 				return false;
 			}
 		});
@@ -246,7 +338,7 @@ function toggleCheckboxActive() {
 		checkbox_mass[i].addEventListener('click', function() {
 			let parentElem = this.parentNode.parentNode;
 
-			if(parentElem.classList.contains('oa')){  //если можно выбрать только один чекбокс
+			if(parentElem.classList.contains('oa') || parentElem.classList.contains('oo')){  //если можно выбрать только один чекбокс
 				let answer_input_mass = parentElem.getElementsByClassName('answer_input'); //собираем все инпуты
 				let checkbox_mass = [];//создаем пустой максив только для чекбоксов
 
@@ -287,186 +379,22 @@ function toggleTextareaActive () {
 };
 
 
-
-
-
-
-
-
-
-
-
-
-////animate (set viewportchecker)
-//jQuery(document).ready(function() {
-// jQuery('.fadeInDown_anim').addClass("hidden").viewportChecker({
-//    classToAdd: 'visible animated initial fadeInDown delay-10s',
-//   offset: 0,
-//   repeat: true
-// });
-//});
-
-// ScrollReveal animate (set viewportchecker)
-//ScrollReveal().reveal('.anim2',{ 
-// 	delay:300,
-// 	reset: true
-// });
-
-// ScrollReveal().reveal('.anim3',{ 
-// 	delay: 500,
-// 	reset: true
-// });
-
-// ScrollReveal().reveal('.anim4',{ 
-// 	delay: 700,
-// 	reset: true
-// });
-
-// ScrollReveal().reveal('.anim5',{ 
-// 	delay: 900,
-// 	reset: true
-// });
-
-
-
-
-
-// window.onload = function() {
-
-// //image resizer
-//   setMaxHeightByWrapper ("projects_carousel_img_wrapper", "projects_carousel_img");
-// // Simple height
-//	setMaxHeightAllBlocks (blockClass)
-
-// /// click out
-// 	$(document).mouseup(function (e){ // отслеживаем событие клика по веб-документу
-// 	    let block = $(".main_nav"); // определяем элемент, к которому будем применять условия (можем указывать ID, класс либо любой другой идентификатор элемента)
-// 	    if (!block.is(e.target) // проверка условия если клик был не по нашему блоку
-// 	        && block.has(e.target).length === 0) { // проверка условия если клик не по его дочерним элементам
-// 	      burger_button.classList.remove('hide_burger');
-// 	      main_nav.classList.add('hide_main_nav');
-// 	    }
-// 	});
-// }
-
-//document.body.clientWidth
-
-// $(document).ready(function() {
-//    $("#form_popup").submit(function() {
-//       $.ajax({
-//          type: "POST",
-//          url: "simple_mail.php",
-//          data: $(this).serialize()
-//       }).done(function() {
-//          $(this).find("inpu, textarea").val("");
-//          alertDone();
-//          $("#form_popup").trigger("reset");
-//       }).fail(function() {
-//         alert('Ошибка соединения');
-//       });
-//       return false;
-//    });
-// });
-
-
-//////////////////name of selected file
-// var wnt_file_top = document.querySelector('.wnt_file_top');
-// document.getElementById('fileToUpload').onchange = function () {
-// let fname = this.value;
-// let fname_mass = fname.split('\\');
-// fname = fname_mass[fname_mass.length-1];
-// wnt_file_top.innerText = fname;
-// };
-
-// var want_file = document.querySelector('.want_file');
-// document.getElementById('fileToUpload_want').onchange = function () {
-// let fname = this.value;
-// let fname_mass = fname.split('\\');
-// fname = fname_mass[fname_mass.length-1];
-// want_file.innerText = fname;
-// };
-
-
-/////////////////////////////////scroll menu
-// $(document).ready(function() {
-// $("a.scroll").click(function() {
-// $("html, body").animate({
-// scrollTop: $($(this).attr("href")).offset().top + "px"
-// }, {
-// duration: 500,
-// easing: "swing"
-// });
-// return false;
-// });
-// });
-
-
-
-
-//////for path length SVG
-// totalLength(); 
-// function totalLength () { 
-// var path = document.querySelector('.fil0'); 
-// var len = Math.round(path.getTotalLength()); 
-// console.log(len); 
-// }
-
-
-
-
-
-
-
-///////////////////////////////owl functions
-//$('.logotypes_carousel').owlCarousel({
-//		loop: true,
-//		nav: false,
-//		responsiveClass: true,
-//		margin: 0,
-//		padding: 0,
-//		dots: false,
-//		responsive: {
-//     0: {
-//       items: 1
-//      },
-//      576: {
-//        items: 2
-//      },
-//      1200: {
-//         items: 3
-//      }
-//   }
-//});
-
-///center by click and swipe
-// set data-position(0++) in HTML
-
-
-//var review_carousel = $('.review_carousel');
-
-// $(document).on('click', '.owl-item>div', function() {
-//   review_carousel.trigger('to.owl.carousel', $(this).data( 'position' ) );
-// 	changeQuote(this.querySelector('.center'));
-// });
-
-// review_carousel.on('dragged.owl.carousel', function(event) {
-// 	changeQuote();
-// })
-
-// changeQuote();
-// function changeQuote(){
-// 	let review_carousel_js = document.querySelector('.review_carousel')
-// 	let review_carousel_text = review_carousel_js.querySelector('.center').querySelector('.personal_quote').innerText;
-// 	document.querySelector('.change_quote').innerText = review_carousel_text;
-// }
-
-//$(window).scroll(function(){
-//
-//    var st = $(this).scrollTop();
-//
-//    $(".lift").css({
-//        "transform" : "translate(0%, " + st/30+ "%)"
-//    });    
-//});
-
-
+$(document).ready(function() {
+   $(".final_form").submit(function() {
+   	if(setPoliticActive()){
+			$.ajax({
+         type: "POST",
+         url: "header_form_mail.php",
+         data: $(this).serialize()
+      }).done(function() {
+				$(this).find("input").val("");
+				location.replace(location + "thank_you.html");
+      }).fail(function() {
+        alert('Ошибка соединения');
+        //это убрать
+				location.replace(location + "thank_you.html");
+      });
+    }
+      return false;
+   });
+});

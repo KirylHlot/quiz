@@ -19,8 +19,8 @@
   <link rel="stylesheet" href="css/main.min.css">
 
 </head>
-
-<body class="body main_view isfooter final_step" 
+<!--start_quiz => final_step -->
+ <body class="body main_view isfooter" 
 style="
   background: url(../img/main_bg.jpg);
   background-size: cover;
@@ -50,10 +50,10 @@ style="
         <i class="fa fa-list-alt" aria-hidden="true"></i>
         <span>Узнайте как получить материнский капитал сразу</span>
       </div>
-      <div class="quiz_item">
+      <div class="quiz_item oa">
         <div class="question_title">Вопрос 1</div>
         <ul class="tips_line">
-          <li class="tip">Чекбокс или Текстареа</li>
+          <li class="tip">Один чекбокс и/или Текстареа</li>
         </ul>
         <ul class="answer_list">
           <li class="answer_input half_width checkbox">
@@ -73,12 +73,12 @@ style="
           </li>
         </ul>
         <ul class="quiz_desc_in_right_column d-none">
-          <li class="description">Вопрос 1</li>
-          <li class="description">Вопрос 1</li>
+          <li class="description">Подсказка</li>
+          <li class="description">Подсказка</li>
         </ul>
       </div>
 
-      <div class="quiz_item">
+      <div class="quiz_item ma">
         <div class="question_title">Вопрос 2</div>
         <ul class="tips_line">
           <li class="tip">Только 1 вариант</li>
@@ -102,15 +102,15 @@ style="
           </li>          
         </ul>
         <ul class="quiz_desc_in_right_column d-none">
-          <li class="description">Вопрос 2</li>
-          <li class="description">Вопрос 2</li>
+          <li class="description">Подсказка</li>
+          <li class="description">Подсказка</li>
         </ul>
       </div>
 
-      <div class="quiz_item">
+      <div class="quiz_item na">
         <div class="question_title">Вопрос 3</div>
           <ul class="tips_line">
-            <li class="tip">Несколько вариантов</li>
+            <li class="tip">Можно пропустить</li>
           </ul>
           <ul class="answer_list">
             <li class="answer_input half_width checkbox">
@@ -131,27 +131,31 @@ style="
             </li>          
           </ul>
         <ul class="quiz_desc_in_right_column d-none">
-          <li class="description">Вопрос 3</li>
-          <li class="description">Вопрос 3</li>
+          <li class="description">Подсказка</li>
+          <li class="description">Подсказка</li>
         </ul>
       </div>
 
-      <div class="quiz_item">
+      <div class="quiz_item aa">
         <div class="question_title">Вопрос 4</div>
         <ul class="tips_line">
-          <li class="tip">Можно пропустить</li>
+<!--           <li class="tip"></li> -->
         </ul>
         <ul class="answer_list">
-          <li class="answer_input full_width text">
-            <input type="text" name="name" placeholder="Имя">
+          <li class="answer_input full_width simple_input">
+            <div class="simple_input_wrapper">
+              <input type="text" name="name" placeholder="Имя">
+            </div>
           </li>            
-          <li class="answer_input full_width number">
-            <input type="number" name="phone" placeholder="Телефон">
+          <li class="answer_input full_width simple_input">
+            <div class="simple_input_wrapper">
+              <input type="number" name="phone" placeholder="Телефон">
+            </div>
           </li>      
         </ul>
         <ul class="quiz_desc_in_right_column d-none">
-          <li class="description">Вопрос 4</li>
-          <li class="description">Вопрос 4</li>
+          <li class="description">Подсказка 1</li>
+          <li class="description">Подсказка 2</li>
         </ul>
       </div>
 
@@ -193,25 +197,26 @@ style="
       <div class="title">Остался последний шаг для получения информации</div>
     </div>
     <div class="bottom_wrapper">
-      <div class="left_wrapper">
-        Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты. Семь своего, знаках текстов необходимыми рукописи ipsum предложения на берегу семантика над она, агенство использовало lorem коварных о послушавшись коварный подпоясал.
+      <div class="ff_left_wrapper">
+        <div class="content">Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты. Семь своего, знаках текстов необходимыми рукописи ipsum предложения на берегу семантика над она, агенство использовало lorem коварных о послушавшись коварный подпоясал.</div>
+        <textarea name="final_textarea" id="content" placeholder="Ваше сообщение"></textarea>
       </div>
-      <div class="right_wrapper">
-        <form action="">
+      <div class="ff_right_wrapper">
+        <form class="final_form">
           <input type="hidden" name="email_adress" value="kirillhlot@mail.ru">
           <input type="hidden" name="answers">
           <div class="form_input_title">Введите имя</div>
           <div class="input_wrapper">
             <i class="fa fa-user" aria-hidden="true"></i>
-            <input type="text" name="name" placeholder="Имя" required>
+            <input type="text" name="name" placeholder="Имя*" required>
           </div>
           <div class="form_input_title">Введите телефон</div>
           <div class="input_wrapper">
             <i class="fa fa-mobile" aria-hidden="true"></i>
-            <input type="text" name="phone" placeholder="Ведите номер" required>
+            <input type="number" name="phone" placeholder="Ведите номер*" required>
           </div>
           <div class="use_messenager_button">
-            <img src="" alt="messanger icons">
+            <i class="fa fa-comments" aria-hidden="true"></i>
             <span>Использовать мессенджер</span>
           </div>
           <button class="form_button">
@@ -219,7 +224,7 @@ style="
             Узнать
           </button>
         </form>
-        <div class="politic_wrapper">
+        <div class="politic_wrapper active">
           <div class="confid_wrap">
             <i class="fa fa-check" aria-hidden="true"></i>
           </div>

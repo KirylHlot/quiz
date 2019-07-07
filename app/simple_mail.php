@@ -9,11 +9,11 @@ $messeneger = trim($_POST["messeneger"]);
 
 $message = "
 <div xmlns=\"http://www.w3.org/1999/xhtml\">
-	Имя: $name
-	<br>Телефон: $phone	
-	<br>Мессенджер(если был выбран): $messeneger	
-	<br>Ответы: $answers
-	<br>Дополнительное сообшение перед отправкой формы: $dop_message
+	<b>Имя:</b> $name
+	<br><b>Телефон:</b> $phone	
+	<br><b>Мессенджер(если был выбран):</b> $messeneger	
+	<br><b>Ответы:</b> <br>$answers
+	<br><b>Дополнительное сообшение перед отправкой формы:</b> $dop_message
 </div>";
 
 $pagetitle = "Новая заявка с нашего сайта $sitename";

@@ -1,17 +1,19 @@
 <?php
-
-$recepient = "kirillhlot@mail.ru";
-$sitename = "Мираж Döner";
-
+$sitename = "Quiz site";
 $phone = trim($_POST["phone"]);
 $name = trim($_POST["name"]);
-$message = trim($_POST["message"]);
+$dop_message = trim($_POST["dop_message"]);
+$answers = trim($_POST["answers"]);
+$recepient = trim($_POST["email_adress"]);
+$messeneger = trim($_POST["messeneger"]);
 
 $message = "
 <div xmlns=\"http://www.w3.org/1999/xhtml\">
-	Телефон: $phone	
-	<br>Имя: $name	
-	<br>Сообщение: $message
+	Имя: $name
+	<br>Телефон: $phone	
+	<br>Мессенджер(если был выбран): $messeneger	
+	<br>Ответы: $answers
+	<br>Дополнительное сообшение перед отправкой формы: $dop_message
 </div>";
 
 $pagetitle = "Новая заявка с нашего сайта $sitename";

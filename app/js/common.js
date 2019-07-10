@@ -298,6 +298,25 @@ function isAnswerValid (elem) {
 		}
 	} //end oo	
 
+////////////////////////////////////////////
+	if (elem.classList.contains('oaon')) { //один ответ или пропустить
+		let countActive = 0;//считаем количество active checkbox
+
+		for (let i = 0; i < answers_mass.length; i++) {
+			if(answers_mass[i].classList.contains('active')) {
+				countActive++;
+				if (countActive > 1){ //если active меньше 2х
+					return false;
+				}
+			}
+		}
+			return true;
+	} //end oaon
+///////////////////////////////////////////////
+
+
+
+
 	if (elem.classList.contains('all')) { //все поля должны быть заполнены
 		let countActive = 0;//считаем количество active checkbox
 		for (let i = 0; i < answers_mass.length; i++) {
@@ -423,7 +442,7 @@ function toggleCheckboxActive() {
 		checkbox_mass[i].addEventListener('click', function() {
 			let parentElem = this.parentNode.parentNode;
 
-			if(parentElem.classList.contains('oa') || parentElem.classList.contains('oo')){  //если можно выбрать только один чекбокс
+			if(parentElem.classList.contains('oa') || parentElem.classList.contains('oo') || parentElem.classList.contains('oaon')){  //если можно выбрать только один чекбокс
 				let answer_input_mass = parentElem.getElementsByClassName('answer_input'); //собираем все инпуты
 				let checkbox_mass = [];//создаем пустой максив только для чекбоксов
 

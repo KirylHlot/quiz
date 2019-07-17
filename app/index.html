@@ -47,6 +47,21 @@ style="
       Узнать
     </div>
   </div>
+  <style>
+    .main_right_wrapper .adkviz_remark {
+      position: absolute;
+      width: 100%;
+      height: auto;
+      text-align: center;
+      bottom: 0;
+      padding: 8px 0;
+    }
+
+    .main_right_wrapper .adkviz_remark a {
+      font-weight: bold;
+    }
+  </style>
+  <div class="adkviz_remark" id="adkviz_remark_01">Сделано в <a href="adquiz.ru">AdQuiz</a></div> 
 </section>
 
 <section class="quiz_wrapper">
@@ -278,9 +293,13 @@ style="
       </div>
       <div class="ff_right_wrapper">
         <form class="final_form">
-          <input type="hidden" name="email_adress" value="kirillhlot@mail.ru">
+          <input type="hidden" name="email_adress" value="[[*email_adress]]">
           <input type="hidden" name="answers" id="answers">
+          <input type="hidden" name="hidden_utm" id="hidden_utm">
           <input type="hidden" name="dop_message" id="dop_message">
+          <input type="hidden" name="url" value="[[*hidden_url]]crm.lead.add.json" id="url">
+          <input type="hidden" name="manager_id" value="[[*hidden_manager_id]]" id="manager_id">
+          <input type="hidden" name="form_name" value="[[*hidden_form_name]]" id="form_name">
          
           <!-- первое окно  -->
           <div class="first_window">
@@ -388,10 +407,19 @@ style="
   <div class="mob_click_button d-none">
     <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
   </div>
+  <style>
+    footer .footer_wrapper .adkviz_remark {
+      padding: 8px 0;
+    }    
+    footer .footer_wrapper .adkviz_remark a{
+      font-weight: bold;
+    }
+  </style>
   <ul class="footer_wrapper">
     <li>Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты. Безорфографичный на берегу, большой если, даль запятых встретил языком рот, сих рукопись одна решила необходимыми. Свое языкового, там дал она повстречался.</li>
     <li>Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты. Безорфографичный на берегу, большой если, даль запятых встретил языком рот, сих рукопись одна решила необходимыми. Свое языкового, там дал она повстречался.</li>
     <li>Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты. Безорфографичный на берегу, большой если, даль запятых встретил языком рот, сих рукопись одна решила необходимыми. Свое языкового, там дал она повстречался.</li>
+    <li class="adkviz_remark" id="adkviz_remark_02">Сделано в <a href="adquiz.ru">AdQuiz</a></li>
   </ul>
 </footer>
 
